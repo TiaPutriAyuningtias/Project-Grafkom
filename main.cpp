@@ -11,6 +11,136 @@ void id();
 void draw_target();
 void redraw();
 
+//untuk menampilkan bitmap char
+void bitmap_output(int x,int y,char *string,void *font)
+{
+int len,i;
+glRasterPos2f(x,y);
+len=(int)strlen(string);
+for(i=0;i<len;i++)
+{
+glutBitmapCharacter(font,string[i]);
+}
+return;
+}
+
+//membuat fungsi counting
+void counting()
+{
+sprintf(str,"Jumlah anak Panah:%d",count);
+bitmap_output(400,40,str,GLUT_BITMAP_HELVETICA_18);
+if(count1==1 && count2==1 && count3==1 && count4==1 && count5==1 && count6==1 && count7==1 && count8==1 && count9==1 && count10==1)
+{
+bitmap_output(5,300,"Selamat Anda Menang",GLUT_BITMAP_TIMES_ROMAN_24);
+glutIdleFunc(NULL);
+}
+else if(count>=15)
+{
+sprintf(str,"Jumlah anak Panah:%d,Jumlah anak Panah = 15. kamu kalah",count);
+bitmap_output(5,300,str,GLUT_BITMAP_TIMES_ROMAN_24);
+glutIdleFunc(NULL);
+}
+}
+
+//untuk memanah target
+void target()
+{
+if((x+110==300) && (y>=435 && y<=465) && (!count1))
+{
+count1=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110 == 375)&&(y>=385&&y<=415) && (!count2))
+{
+count2=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==399)&&(y>=465 &&y<=495)&&(!count3))
+{
+count3=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==249)&&(y>=355&&y<=385)&&(!count4))
+
+{
+count4=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==351)&&(y>=315&&y<=345)&&(!count5))
+{
+count5=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==450)&&(y>=275&&y<=305)&&(!count6))
+{
+count6=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==330)&&(y>=230&&y<=260)&&(!count7))
+{
+count7=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==201)&&(y>=185&&y<=215)&&(!count8))
+{
+count8=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==339)&&(y>=135&&y<=165)&&(!count9))
+{
+count9=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+else if((x+110==300)&&(y>=85&&y<=115)&&(!count10))
+{
+count10=1;
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+}
+
+//untuk memindahkan panah ke atas
+void id()
+{
+y+=n;
+target();
+if(y>maxy)
+{
+y=0;
+count++;
+}
+glutPostRedisplay();
+}
+
 //menggambar panah
 void disp()
 {
