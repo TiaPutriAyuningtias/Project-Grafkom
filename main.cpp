@@ -11,6 +11,46 @@ void id();
 void draw_target();
 void redraw();
 
+//menggambar panah
+void disp()
+{
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glLoadIdentity();
+glColor3f(1,1,0);
+bitmap_output(120,50,"Shoot The Triangle",GLUT_BITMAP_TIMES_ROMAN_24);
+counting();
+
+//titik gambar panah
+glColor3f(0,1,1);
+glBegin(GL_LINES);
+glVertex2d(x,y);
+glVertex2d(x+50,y);
+glEnd();
+glLineWidth(2);
+glBegin(GL_LINES);
+glVertex2d(x,y+2);
+glVertex2d(x+50,y-2);
+glEnd();
+glBegin(GL_LINES);
+glVertex2d(x,y-2);
+glVertex2d(x+50,y-2);
+glEnd();
+glBegin(GL_TRIANGLES);
+glVertex2d (x+50,y+3);
+glVertex2d(x+60,y);
+glVertex2d(x+50,y-5);
+glEnd();
+glBegin(GL_QUADS);
+glVertex2d(x,y+3);
+glVertex2d(x,y-3);
+glVertex2d(x-10,y-5);
+glVertex2d(x-10,y+5);
+glEnd();
+draw_target();
+glFlush();
+glutSwapBuffers();
+}
+
 void init()
 {
 glClearColor(0.10,0.10,0.20,0.50);
@@ -267,6 +307,58 @@ glEnd();
 glFlush();
 }
 
+//Memindahkan panah dengan menekan huruf "r" pada keyboard
+void id1()
+{
+x+=m;
+target();
+if(x+110>maxx)
+{
+x=25;
+y=0;
+count++;
+glutIdleFunc(id);
+}
+glutPostRedisplay();
+}
+
+//set key to perform desired operation
+void keys(unsigned char k,int r,int q)
+{
+if(k=='r')
+glutIdleFunc(id1);
+if(k=='q')
+exit(0);
+}
+
+//sub menu to display instructions
+void demo_menu(int i)
+{
+switch(i)
+{
+case 5:
+case 6:
+case 7:
+case 8:break;
+}
+}
+
+//sub menu to display designer names
+void demo(int i)
+{
+switch(i)
+{
+case 9:
+case 10:
+case 11:break;
+}
+}
+void game(int id)
+{
+switch(id);
+{
+}
+}
 
 int main(int argc,char **argv)
 {
